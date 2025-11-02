@@ -30,12 +30,12 @@ function DrawText3D(coords, text)
 end
 
 -- Return a random position inside Config.Arena.botArea (2-corner rectangle)
-function GetRandomBotPosition()
+local function GetRandomBotPosition()
     local A, B = Config.Arena.botArea.A, Config.Arena.botArea.B
     local minX, maxX = math.min(A.x, B.x), math.max(A.x, B.x)
     local minY, maxY = math.min(A.y, B.y), math.max(A.y, B.y)
-    local x = math.random() * (maxX - minX) + minX
-    local y = math.random() * (maxY - minY) + minY
+    local x = math.random(minX * 100, maxX * 100) / 100
+    local y = math.random(minY * 100, maxY * 100) / 100
     local z = A.z
     local w = math.random(0, 360)
     return { x = x, y = y, z = z, w = w }

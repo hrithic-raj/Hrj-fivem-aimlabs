@@ -3,6 +3,7 @@ local isInMatch = false
 local score = 0
 local currentBot = nil
 local spawnedBotEntities = {}
+local QBCore = exports['qb-core']:GetCoreObject()
 
 local function ShowSubtitle(msg, time)
     BeginTextCommandPrint("STRING")
@@ -46,6 +47,7 @@ RegisterNetEvent("aimlabs:client:StartMatch", function(payload)
     for i = 1, Config.MatchBotCount do
         -- Request spawn pos from server (server returns by event aimlabs:client:SpawnBot)
         TriggerServerEvent("aimlabs:server:RequestBotPos")
+        print("[DEBUG] Requested bot spawn from server...") 
         -- wait until server sends SpawnBot event and currentBot is set
         local startTime = GetGameTimer()
         local killed = false
@@ -99,6 +101,7 @@ end)
 
 -- Server gave us a bot spawn position — spawn it locally and set currentBot
 RegisterNetEvent("aimlabs:client:SpawnBot", function(botPos)
+    print("[DEBUG] aimlabs:client:SpawnBot triggered with coords", botPos.x, botPos.y, botPos.z)
     if not botPos then return end
     local model = GetHashKey(Config.BotModel)
     RequestModel(model)

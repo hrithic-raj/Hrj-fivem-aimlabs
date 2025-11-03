@@ -42,7 +42,8 @@ RegisterNetEvent("aimlabs:client:StartMatch", function(payload)
         ShowSubtitle("Starting in ~y~" .. i .. "~s~...", 1000)
         Wait(1000)
     end
-
+    
+    Wait(500) -- DEBUG: helps sync server session state
     -- Sequential spawn loop (client asks server for positions)
     for i = 1, Config.MatchBotCount do
         -- Request spawn pos from server (server returns by event aimlabs:client:SpawnBot)

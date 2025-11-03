@@ -28,7 +28,7 @@ RegisterNUICallback("startMatch", function(data, cb)
     menuOpen = false
 
     -- ✅ FIXED: call the correct event used in match.lua
-    TriggerEvent("aimlabs:client:StartMatch", {
+    TriggerServerEvent("aimlabs:server:StartMatch", {
         difficulty = data.difficulty,
         weapon = data.weapon
     })
